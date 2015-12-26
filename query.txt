@@ -1,0 +1,139 @@
+//JURNAL KAS BANK
+select *, case when posisi = 'Debit' then jumlah else 0 end as debit, 
+case when posisi = 'Kredit' then -jumlah else 0 end as kredit, 
+case when a.no = (select b.no from jurnal b where no_ref = '1201' order by b.no limit 1) 
+then (select jumlah from saldo where no_ref='1201') else 0 end as 'saldo_awal' 
+from jurnal a where a.no_ref = '1201' group by no
+
+//BUKU BESAR KAS BANK 
+SELECT *, (select sum(debit+kredit+saldo_awal) from jurnal_kas_bank b where b.no <=a.no) as saldo FROM jurnal_kas_bank a where no_ref='1201' group by no
+
+//JURNAL KAS
+select *, case when posisi = 'Debit' then jumlah else 0 end as debit, 
+case when posisi = 'Kredit' then -jumlah else 0 end as kredit, 
+case when a.no = (select b.no from jurnal b where no_ref = '1101' order by b.no limit 1) 
+then (select jumlah from saldo where no_ref='1101') else 0 end as 'saldo_awal' 
+from jurnal a where a.no_ref = '1101' group by no
+
+//BUKU BESAR KAS 
+SELECT *, (select sum(debit+kredit+saldo_awal) from jurnal_kas b where b.no <=a.no) as saldo FROM jurnal_kas a where no_ref='1101' group by no
+
+//JURNAL PIUTANG BUNGA BANK
+select *, case when posisi = 'Debit' then jumlah else 0 end as debit, 
+case when posisi = 'Kredit' then -jumlah else 0 end as kredit, 
+case when a.no = (select b.no from jurnal b where no_ref = '1204' order by b.no limit 1) 
+then (select jumlah from saldo where no_ref='1204') else 0 end as 'saldo_awal' 
+from jurnal a where a.no_ref = '1204' group by no
+
+//BUKU BESAR PIUTANG BUNGA BANK 
+SELECT *, (select sum(debit+kredit+saldo_awal) from jurnal_piutang_bunga_bank b where b.no <=a.no) as saldo FROM jurnal_piutang_bunga_bank a where no_ref='1204' group by no
+
+//JURNAL PIUTANG REGULER
+select *, case when posisi = 'Debit' then jumlah else 0 end as debit, 
+case when posisi = 'Kredit' then -jumlah else 0 end as kredit, 
+case when a.no = (select b.no from jurnal b where no_ref = '1202' order by b.no limit 1) 
+then (select jumlah from saldo where no_ref='1202') else 0 end as 'saldo_awal' 
+from jurnal a where a.no_ref = '1202' group by no
+
+//BUKU BESAR PIUTANG REGULER 
+SELECT *, (select sum(debit+kredit+saldo_awal) from jurnal_piutang_reguler b where b.no <=a.no) as saldo FROM jurnal_piutang_reguler a where no_ref='1202' group by no
+
+//JURNAL PIUTANG POKOK
+select *, case when posisi = 'Debit' then jumlah else 0 end as debit, 
+case when posisi = 'Kredit' then -jumlah else 0 end as kredit, 
+case when a.no = (select b.no from jurnal b where no_ref = '1205' order by b.no limit 1) 
+then (select jumlah from saldo where no_ref='1205') else 0 end as 'saldo_awal' 
+from jurnal a where a.no_ref = '1205' group by no
+
+//BUKU BESAR PIUTANG POKOK 
+SELECT *, (select sum(debit+kredit+saldo_awal) from jurnal_piutang_pokok b where b.no <=a.no) as saldo FROM jurnal_piutang_pokok a where no_ref='1205' group by no
+
+//JURNAL PIUTANG BANK
+select *, case when posisi = 'Debit' then jumlah else 0 end as debit, 
+case when posisi = 'Kredit' then -jumlah else 0 end as kredit, 
+case when a.no = (select b.no from jurnal b where no_ref = '1203' order by b.no limit 1) 
+then (select jumlah from saldo where no_ref='1203') else 0 end as 'saldo_awal' 
+from jurnal a where a.no_ref = '1203' group by no
+
+//BUKU BESAR PIUTANG BANK
+SELECT *, (select sum(debit+kredit+saldo_awal) from jurnal_piutang_bank b where b.no <=a.no) as saldo FROM jurnal_piutang_bank a where no_ref='1203' group by no
+
+//BUKU BESAR BEBAN DITANGGUHKAN
+select *, case when posisi = 'Debit' then jumlah else 0 end as debit, 
+case when posisi = 'Kredit' then -jumlah else 0 end as kredit, 
+case when a.no = (select b.no from jurnal b where no_ref = '6101' order by b.no limit 1) 
+then (select jumlah from saldo where no_ref='6101') else 0 end as 'saldo_awal' 
+from jurnal a where a.no_ref = '6101' group by no
+
+
+//JURNAL SIMPANAN POKOK
+select *, case when posisi = 'Debit' then -jumlah else 0 end as debit, 
+case when posisi = 'Kredit' then jumlah else 0 end as kredit, 
+case when a.no = (select b.no from jurnal b where no_ref = '2201' order by b.no limit 1) 
+then (select jumlah from saldo where no_ref='2201') else 0 end as 'saldo_awal' 
+from jurnal a where a.no_ref = '2201' group by no
+
+//BUKU BESAR SIMPANAN POKOK
+SELECT *, (select sum(debit+kredit+saldo_awal) from jurnal_simpanan_pokok b where b.no <=a.no) as saldo FROM jurnal_simpanan_pokok a where no_ref='2201' group by no
+
+//JURNAL SIMPANAN WAJIB
+select *, case when posisi = 'Debit' then -jumlah else 0 end as debit, 
+case when posisi = 'Kredit' then jumlah else 0 end as kredit, 
+case when a.no = (select b.no from jurnal b where no_ref = '2202' order by b.no limit 1) 
+then (select jumlah from saldo where no_ref='2202') else 0 end as 'saldo_awal' 
+from jurnal a where a.no_ref = '2202' group by no
+
+//BUKU BESAR SIMPANAN WAJIB
+SELECT *, (select sum(debit+kredit+saldo_awal) from jurnal_simpanan_wajib b where b.no <=a.no) as saldo FROM jurnal_simpanan_wajib a where no_ref='2202' group by no
+
+//JURNAL SIMPANAN WAJIB
+select *, case when posisi = 'Debit' then -jumlah else 0 end as debit, 
+case when posisi = 'Kredit' then jumlah else 0 end as kredit, 
+case when a.no = (select b.no from jurnal b where no_ref = '2203' order by b.no limit 1) 
+then (select jumlah from saldo where no_ref='2203') else 0 end as 'saldo_awal' 
+from jurnal a where a.no_ref = '2203' group by no
+
+//BUKU BESAR SUKARELA
+SELECT *, (select sum(debit+kredit+saldo_awal) from jurnal_simpanan_sukarela b where b.no <=a.no) as saldo FROM jurnal_simpanan_sukarela a where no_ref='2203' group by no
+
+//JURNAL UTANG BUNGA BANK
+select *, case when posisi = 'Debit' then -jumlah else 0 end as debit, 
+case when posisi = 'Kredit' then jumlah else 0 end as kredit, 
+case when a.no = (select b.no from jurnal b where no_ref = '2205' order by b.no limit 1) 
+then (select jumlah from saldo where no_ref='2205') else 0 end as 'saldo_awal' 
+from jurnal a where a.no_ref = '2205' group by no
+
+//BUKU BESAR BUNGA BANK
+SELECT *, (select sum(debit+kredit+saldo_awal) from jurnal_utang_bunga_bank b where b.no <=a.no) as saldo FROM jurnal_utang_bunga_bank a where no_ref='2205' group by no
+
+//JURNAL UTANG BANK
+select *, case when posisi = 'Debit' then -jumlah else 0 end as debit, 
+case when posisi = 'Kredit' then jumlah else 0 end as kredit, 
+case when a.no = (select b.no from jurnal b where no_ref = '2204' order by b.no limit 1) 
+then (select jumlah from saldo where no_ref='2204') else 0 end as 'saldo_awal' 
+from jurnal a where a.no_ref = '2204' group by no
+
+//BUKU BESAR BUNGA BANK
+SELECT *, (select sum(debit+kredit+saldo_awal) from jurnal_utang_bank b where b.no <=a.no) as saldo FROM jurnal_utang_bank a where no_ref='2204' group by no
+
+//BUKU BESAR PENDAPATAN DITANGGUHKAN
+select *, case when posisi = 'Debit' then -jumlah else 0 end as debit, 
+case when posisi = 'Kredit' then jumlah else 0 end as kredit, 
+case when a.no = (select b.no from jurnal b where no_ref = '4102' order by b.no limit 1) 
+then (select jumlah from saldo where no_ref='4102') else 0 end as 'saldo_awal' 
+from jurnal a where a.no_ref = '4102' group by no
+
+//BUKU BESAR HASIL PENDAPATAN BUNGA BANK
+select *, case when posisi = 'Debit' then -jumlah else 0 end as debit, 
+case when posisi = 'Kredit' then jumlah else 0 end as kredit, 
+case when a.no = (select b.no from jurnal b where no_ref = '4101' order by b.no limit 1) 
+then (select jumlah from saldo where no_ref='4101') else 0 end as 'saldo_awal' 
+from jurnal a where a.no_ref = '4101' group by no
+
+//SALDO AWAL
+SELECT DATE_ADD(LAST_DAY(DATE_SUB(tanggal_transaksi, interval 1 month)), interval 1 day) as "tanggal" , case when((select month(tanggal_transaksi) from bb_simpanan_pokok where year(tanggal_transaksi) = "2014" limit 1) = month(tanggal_transaksi)) = 1 then saldo_awal else (select saldo from bb_simpanan_pokok where year(tanggal_transaksi) = "2014" and month(tanggal_transaksi) = (select month(tanggal_transaksi) from bb_simpanan_pokok where year(tanggal_transaksi) = "2014" limit 1) order by no desc limit 1) end as "saldo_awal" FROM bb_simpanan_pokok where year(tanggal_transaksi) = "2014" and month(tanggal_transaksi) = "8" order by no desc limit 1
+
+//PINJAMAN
+select anggota.id_anggota, anggota.nama, ifnull((select sum(nominal_pinjaman) from pinjaman p where p.id_anggota = anggota.id_anggota and acc = 1), 0) as "nominal_pinjaman", ifnull((select count(id_pinjaman) from pinjaman p where p.id_anggota = anggota.id_anggota and acc = 2), 0) as "menunggu", ifnull((select count(id_pinjaman) from pinjaman p where p.id_anggota = anggota.id_anggota and acc = 1), 0) as "diterima", ifnull((select count(id_pinjaman) from pinjaman p where p.id_anggota = anggota.id_anggota and acc = 0), 0) as "ditolak" from pinjaman join anggota on pinjaman.id_anggota = anggota.id_anggota join jenis_pinjaman on pinjaman.id_jenis_pinjaman = jenis_pinjaman.id_jenis_pinjaman join jenis_angsuran on pinjaman.id_jenis_angsuran = jenis_angsuran.id_jenis_angsuran group by anggota.id_anggota
+
+select DATE_ADD(LAST_DAY(DATE_SUB('2009-03-20', interval 30 day)), interval 1 day)
